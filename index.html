@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leaflet Map Example with Custom Marker</title>
-  <!-- Подключаем стили Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <!-- Устанавливаем размеры контейнера для карты -->
+
 
     <style type="text/css">
     #map {
@@ -16,13 +15,9 @@
   </style>
 </head>
 <body>
-  <!-- Создаем контейнер для карты -->
+
   <div id="map"></div>
-
-  <!-- Подключаем скрипт Leaflet API -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <!-- Подключаем скрипт для определения местоположения -->
   <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
 
@@ -43,11 +38,8 @@
     var marker = L.marker([43.244157, 76.873126], { icon: customIcon }).addTo(map)
       .bindPopup('Питьевая вода').openPopup();
 
-    // Добавляем кнопку для определения местоположения пользователя
-    L.control.locate({
-      icon: 'fa fa-location-arrow',  // используем значок стрелки для кнопки
-      iconLoading: 'fa fa-spinner fa-spin',  // используем значок спиннера во время загрузки
-    }).addTo(map);
+
+    L.control.locate().addTo(map);
 
     var marker = L.marker([43.249835, 76.877472], { icon: customIcon }).addTo(map)
       .bindPopup('Питьевая вода').openPopup();
@@ -57,7 +49,7 @@
     map.on('locationfound', function (e) {
       var radius = e.accuracy / 2;
 
-      L.marker(e.latlng, { icon: customIcon }).addTo(map)
+      L.marker(e.latlng).addTo(map)
         .bindPopup("Вы находитесь здесь!").openPopup();
 
       L.circle(e.latlng, radius).addTo(map);
